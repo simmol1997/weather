@@ -1,1 +1,38 @@
-<
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>Local Weather</title>
+  	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+
+	</head>
+	<body>
+
+    <div class="container-fluid">
+      <div class="row center-block">
+        <h1 id="region">
+        </h1>
+        <div class="weather-description col-xs-6">
+          <div>
+            Temperature in <button id="celcius" class="btn btn-info">Celcius</button> / <button id="fahrenheit" class="btn btn-info">Fahrenheit</button>
+          </div>
+          <div id="temperature">
+          </div>
+        </div>
+        <div id="weather" class="weather-description col-xs-6">
+        </div>
+
+        <div id="weather-image">
+        </div>
+      </div>
+    </div>
+
+  </body>

@@ -1,0 +1,20 @@
+body {
+  background: rgba(255,255,0,0.4); /* change depending on weather */
+  font-family: "Baloo Bhaijaan";
+}
+
+.row {
+  width: 70%;
+  text-align: center;
+}
+
+#region {
+  color: crimson;
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+.weather-description {
+  font-size: 30px;
+  color: green;
+}

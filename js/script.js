@@ -68,7 +68,7 @@ function generateWeatherInfo(lat, lng) {
 function generateRegionInfo() {
   $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyDc6D27iS4YU81PiN9OLlLLJIDkkgKX5ws", function(regionJson) {
 
-    var html = "<b>" + regionJson[3].formated_address + "</b>";
+    var html = "<b>" + regionJson.results[0].formated_address + "</b>";
     $("#region").html(html);
   });
 }

@@ -46,13 +46,13 @@ function convertToFahr(tempC) {
 function generateWeatherInfo(lat, lng) {
   $.getJSON("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lng, function(weatherJson) {
 
-    var temp = weatherJson.main.temp;
+    var temperature = weatherJson.main.temp;
     if (celcius)
-      $("#temperature").html(temp + " &deg;C");
+      $("#temperature").html(temperature + " &deg;C");
 
     else {
-      temp = convertToFahr(temp);
-      $("#temperature").html(temp + " &deg;F");
+      temperature = convertToFahr(temperature);
+      $("#temperature").html(temperature + " &deg;F");
     }
 
     var weather = weatherJson.weather[0].main;

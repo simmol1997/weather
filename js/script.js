@@ -22,7 +22,7 @@ $(document).ready(function() {
   var latlng = getLatLng();
   generateWeatherInfo(latlng.latitude, latlng.longitude);
 
-  generateRegionInfo();
+  generateRegionInfo(latlng.latitude, latlng.longitude);
 });
 
 /* Returns a dictionary with two elements. The first one being lat and the second lng */
@@ -65,10 +65,10 @@ function generateWeatherInfo(lat, lng) {
 /* ----------- */
 
 /* Generates the region based on googles api */
-function generateRegionInfo() {
-  $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyDc6D27iS4YU81PiN9OLlLLJIDkkgKX5ws", function(regionJson) {
+function generateRegionInfo(lat, lng) {
+  $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=AIzaSyDc6D27iS4YU81PiN9OLlLLJIDkkgKX5ws", function(regionJson) {
 
-    var html = "<b>" + regionJson.results[0].formated_address + "</b>";
+    var html = "<b>" + regionJson.results[0].formatted_address + "</b>";
     $("#region").html(html);
   });
 }

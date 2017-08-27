@@ -28,3 +28,9 @@ img, #weather-image {
   margin-left: auto;
   margin-right: auto;
 }
+
+@media (max-width: 767px) {
+  .container-fluid {
+    width: 100%;
+  }
+}

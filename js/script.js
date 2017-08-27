@@ -1,4 +1,5 @@
 var celcius = true; // If true it displays the temperature in celcius
+var tempCelcius = 0;
 var weatherToImg = {
   "Rain": "photos/rain.png",
   "Clouds": "photos/clouds.png",
@@ -10,33 +11,31 @@ $(document).ready(function() {
   // The buttons decide which unit to use for the temperature
   $("#celcius").on("click", function() {
     celcius = true;
-    var latlng = getLatLng();
-    generateWeatherInfo(latlng.latitude, latlng.longitude);
+    generateTemperatureInfo(tempCelcius);
   });
   $("#fahrenheit").on("click", function() {
     celcius = false;
-    var latlng = getLatLng();
-    generateWeatherInfo(latlng.latitude, latlng.longitude);
+    generateTemperatureInfo(tempCelcius);
   });
 
-  var latlng = getLatLng();
-  generateWeatherInfo(latlng.latitude, latlng.longitude);
-
-  generateRegionInfo(latlng.latitude, latlng.longitude);
+  getPosition();
 });
 
-/* Returns a dictionary with two elements. The first one being lat and the second lng */
-function getLatLng() {
-  var latlng = {};
+funciton getPosition() {
   if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(pos) {
-
-      latlng = {"latitude": pos.coords.latitude, "longitude": pos.coords.longitude};
-    });
+    navigator.geolocation.getCurrentPosition(generateInfo);
   }
-  return latlng
+  else {
+    $("#region").html("Geolocation failed.");
+  }
 }
-/* --------- */
+
+function generateInfo(geoPos) {
+  lat = geoPos.coords.latitude;
+  lng = geoPos.coords.longitude;
+  generateWeatherInfo(lat, lng);
+  generateRegionInfo(lat, lng);
+}
 
 function convertToFahr(tempC) {
   return tempC * 9/5 + 32;
@@ -46,14 +45,8 @@ function convertToFahr(tempC) {
 function generateWeatherInfo(lat, lng) {
   $.getJSON("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lng, function(weatherJson) {
 
-    var temperature = weatherJson.main.temp;
-    if (celcius)
-      $("#temperature").html(temperature + " &deg;C");
-
-    else {
-      temperature = convertToFahr(temperature);
-      $("#temperature").html(temperature + " &deg;F");
-    }
+    var tempCelcius = weatherJson.main.temp;
+    generateTemperatureInfo(tempCelcius);
 
     var weather = weatherJson.weather[0].main;
     var weatherDesc = weatherJson.weather[0].description;
@@ -63,6 +56,18 @@ function generateWeatherInfo(lat, lng) {
   });
 }
 /* ----------- */
+
+/* Sets the temperature */
+function generateTemperatureInfo(tempC) {
+  if (celcius)
+    $("#temperature").html(tempC + " &deg;C");
+
+  else {
+    tempC = convertToFahr(tempC);
+    $("#temperature").html(tempC + " &deg;F");
+  }
+}
+/* -------- */
 
 /* Generates the region based on googles api */
 function generateRegionInfo(lat, lng) {

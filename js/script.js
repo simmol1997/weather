@@ -21,7 +21,7 @@ $(document).ready(function() {
   getPosition();
 });
 
-funciton getPosition() {
+function getPosition() {
   if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(generateInfo);
   }
@@ -38,14 +38,16 @@ function generateInfo(geoPos) {
 }
 
 function convertToFahr(tempC) {
-  return tempC * 9/5 + 32;
+  var tempDec = tempC * 1.8 + 32;
+  tempDec = Math.round(tempDec * Math.pow(10, 2)) / Math.pow(10, 2); // Makes the maximum decimal places be 2
+  return tempDec;
 }
 
 /* Generates the temperature and weather descriptions in the index.html file based on the api*/
 function generateWeatherInfo(lat, lng) {
   $.getJSON("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lng, function(weatherJson) {
 
-    var tempCelcius = weatherJson.main.temp;
+    tempCelcius = weatherJson.main.temp;
     generateTemperatureInfo(tempCelcius);
 
     var weather = weatherJson.weather[0].main;

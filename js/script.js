@@ -3,7 +3,8 @@ var tempCelcius = 0;
 var weatherToImg = {
   "Rain": "photos/rain.png",
   "Clouds": "photos/clouds.png",
-  "Clear": "photos/clear.png"
+  "Clear": "photos/clear.png",
+  "Mist": "photos/mist.png"
 };
 
 $(document).ready(function() {
